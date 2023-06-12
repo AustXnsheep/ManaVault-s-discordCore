@@ -1,0 +1,10 @@
+name: discordcore
+version: '${project.version}'
+main: austxnsheep.main.Main
+api-version: 1.17
+
+commands:
+  std:
+    description: Sends message to discord
+    usage: /std
+    permission: discordcore.std
