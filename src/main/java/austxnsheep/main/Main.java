@@ -20,7 +20,7 @@ public final class Main extends JavaPlugin {
     public ScheduledTaskRunner scheduledTaskRunner = new ScheduledTaskRunner();
     public Core core = new Core();
     public PlayerDataConfig pdc = new PlayerDataConfig();
-    public static String token = "MTExNjk5NDkyMzI0MjIxMzQxNg.GnPwd_.IzppJso9eEkDipD7_OMp_0w-ZXehevFr-mQ-A4";
+    public static String token = "Some guys token";
     public static JDA jda = JDABuilder.createDefault(token)
             .enableIntents(MESSAGE_CONTENT)
             .addEventListeners(new onMessageReceive())
