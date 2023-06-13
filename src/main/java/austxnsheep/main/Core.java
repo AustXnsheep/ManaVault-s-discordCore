@@ -39,6 +39,17 @@ public class Core {
         assert channel != null;
         channel.sendMessageEmbeds(ebuilder.build()).queue();
     }
+    //sendToDiscordAsError(Main.jda, top message, bottom message, long message) It always sends to the private channel.
+    public void sendToDiscordAsError(JDA jda, String h1, String h2, String title) {
+        TextChannel channel = jda.getTextChannelById("1116988575737720841");
+        EmbedBuilder ebuilder = new EmbedBuilder();
+        ebuilder.setTitle(title);
+        ebuilder.setAuthor(h1);
+        ebuilder.setDescription(h2);
+        ebuilder.setColor(Color.blue);
+        assert channel != null;
+        channel.sendMessageEmbeds(ebuilder.build()).queue();
+    }
     public void executeConsoleCommand(String command) {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         Bukkit.getServer().dispatchCommand(console, command);

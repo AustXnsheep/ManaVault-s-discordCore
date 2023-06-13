@@ -26,8 +26,7 @@ public class ScheduledTaskRunner {
     }
 
     public long getUptime() {
-        int uptimeMilliseconds = (int) System.currentTimeMillis();
-        return uptimeMilliseconds / ((1000*60*60) / 24);
+        return (int) System.currentTimeMillis();
     }
     public float getAveragePing() {
         float totalPing = 0;
@@ -49,7 +48,7 @@ public class ScheduledTaskRunner {
         long uptimeinhours = (int) getUptime();
         //sendToDiscordWithoutPlayer(Main.jda, top message, bottom message, channel id, long message)
         Main.jda.getPresence().setStatus(OnlineStatus.ONLINE);
-        Main.jda.getPresence().setActivity(Activity.playing("ManaVault \nPlayers: " + amountofplayers + " \nTPS: " + Math.round(tps) + " \nUptime: " + uptimeinhours));
+        Main.jda.getPresence().setActivity(Activity.playing("ManaVault \nPlayers: " + amountofplayers + " \nTPS: " + Math.round(tps) + " \nUptime: " + uptimeinhours + "MS"));
         if(tps<=10) {
             //sendToDiscordWithoutPlayer(JDA jda, String h1, String h2, String id, String title)
             stopUpdatingEvent();
