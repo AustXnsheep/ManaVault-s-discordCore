@@ -3,7 +3,6 @@ package austxnsheep.main;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
@@ -11,12 +10,10 @@ import org.bukkit.entity.Player;
 
 import java.awt.*;
 
-import static javax.sql.rowset.spi.SyncFactory.getLogger;
-
-public class Core {
-    public void sendToDiscordWithPlayer(JDA jda, String playername, String h1, String id, String content_message) {
+public interface Core {
+    default void sendToDiscordWithPlayer(JDA jda, String playername, String h1, String id, String content_message) {
         Player player = Bukkit.getPlayer(playername);
-        String playerface = "https://crafatar.com/avatars/" + player.getUniqueId();
+        String playerface = "https://crafatar.com/renders/head/" + player.getUniqueId();
         TextChannel channel = jda.getTextChannelById(id);
         EmbedBuilder ebuilder = new EmbedBuilder();
         ebuilder.setTitle(content_message);
@@ -27,9 +24,7 @@ public class Core {
         assert channel != null;
         channel.sendMessageEmbeds(ebuilder.build()).queue();
     }
-    //UNLOAD_EVENT
-    //sendToDiscordWithoutPlayer(Main.jda, top message, bottom message, channel id, long message)
-    public void sendToDiscordWithoutPlayer(JDA jda, String h1, String h2, String id, String title) {
+    default void sendToDiscordWithoutPlayer(JDA jda, String h1, String h2, String id, String title) {
         TextChannel channel = jda.getTextChannelById(id);
         EmbedBuilder ebuilder = new EmbedBuilder();
         ebuilder.setTitle(title);
@@ -39,22 +34,12 @@ public class Core {
         assert channel != null;
         channel.sendMessageEmbeds(ebuilder.build()).queue();
     }
-    //sendToDiscordAsError(Main.jda, top message, bottom message, long message) It always sends to the private channel.
-    public void sendToDiscordAsError(JDA jda, String h1, String h2, String title) {
-        TextChannel channel = jda.getTextChannelById("1116988575737720841");
-        EmbedBuilder ebuilder = new EmbedBuilder();
-        ebuilder.setTitle(title);
-        ebuilder.setAuthor(h1);
-        ebuilder.setDescription(h2);
-        ebuilder.setColor(Color.blue);
-        assert channel != null;
-        channel.sendMessageEmbeds(ebuilder.build()).queue();
-    }
-    public void executeConsoleCommand(String command) {
+
+    default void executeConsoleCommand(String command) {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         Bukkit.getServer().dispatchCommand(console, command);
     }
-    public void sendClickableLink(Player player, String message, String link) {
+    default void sendClickableLink(Player player, String message, String link) {
         String formattedMessage = ChatColor.BLUE + message + " " + ChatColor.UNDERLINE + ChatColor.BOLD + link;
         player.sendMessage(formattedMessage);
     }
